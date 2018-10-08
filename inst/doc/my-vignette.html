@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Hengxin Li, Mingbin Feng" />
+
+<meta name="date" content="2018-10-01" />
+
+<title>A Comprehensive Monte Carlo Valuation of Variable Annuities</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">A Comprehensive Monte Carlo Valuation of Variable Annuities</h1>
+<h4 class="author"><em>Hengxin Li, Mingbin Feng</em></h4>
+<h4 class="date"><em>2018-10-01</em></h4>
+
+
+
+<div id="package-info" class="section level1">
+<h1>Package Info</h1>
+<p>This package uses Monte Carlo simulation to estimate the fair market value of a large portfolio of synthetic variable annuities. The portfolio of variable annuities under consideration is generated based on realistic features of common types of guarantee riders in North America. The Monte Carlo simulation engine generates sample paths of asset prices based on Black-Scholes model. In this vignette, we will demonstrate the functionalities provided in this package.</p>
+<p>For illustrative purposes, we will use few scenarios to valuate a pool of two variable annuities. Users may obtain a more robust valuation result by increasing the amount of risk-neutral scenarios.</p>
+<div id="yield-curve-generation" class="section level2">
+<h2>Yield Curve Generation</h2>
+<p>In this step, we exploit Newton’s method to calculate discount factors and forward rates at different tenor based on given swap rates using <em>buildCurve()</em>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Initialize required inputs to boostrap a curve</span>
+swap &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.69</span>, <span class="fl">0.77</span>, <span class="fl">0.88</span>, <span class="fl">1.01</span>, <span class="fl">1.14</span>, <span class="fl">1.38</span>, <span class="fl">1.66</span>, <span class="fl">2.15</span>)<span class="op">*</span><span class="fl">0.01</span>
+tenor &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">10</span>, <span class="dv">30</span>)
+fixFreq &lt;-<span class="st"> </span><span class="dv">6</span>
+fixDCC &lt;-<span class="st"> &quot;Thirty360&quot;</span>
+fltFreq &lt;-<span class="st"> </span><span class="dv">6</span>
+fltDCC &lt;-<span class="st"> &quot;ACT360&quot;</span>
+calendar &lt;-<span class="st"> &quot;NY&quot;</span>
+bdc &lt;-<span class="st"> &quot;Modified_Foll&quot;</span>
+curveDate &lt;-<span class="st"> &quot;2016-02-08&quot;</span>
+numSetDay &lt;-<span class="st"> </span><span class="dv">2</span>
+yieldCurveDCC &lt;-<span class="st"> &quot;Thirty360&quot;</span>
+<span class="co"># Bootstrap a forward curve </span>
+<span class="kw">buildCurve</span>(swap, tenor, fixFreq, fixDCC, fltFreq, fltDCC, calendar, bdc,
+            curveDate, numSetDay, yieldCurveDCC)
+<span class="co">#&gt;      obsDate discountFac    zeroRate forwardCurve  dayCount</span>
+<span class="co">#&gt; 1 2016-02-08   1.0000000 0.000000000  0.006912035  0.000000</span>
+<span class="co">#&gt; 2 2017-02-10   0.9930975 0.006888125  0.008520036  1.005556</span>
+<span class="co">#&gt; 3 2018-02-10   0.9847078 0.007683825  0.011060713  2.005556</span>
+<span class="co">#&gt; 4 2019-02-10   0.9739354 0.008787170  0.014146403  3.005556</span>
+<span class="co">#&gt; 5 2020-02-10   0.9603499 0.010100373  0.016846310  4.005556</span>
+<span class="co">#&gt; 6 2021-02-10   0.9444396 0.011420029  0.020451281  5.005556</span>
+<span class="co">#&gt; 7 2023-02-10   0.9073275 0.013882093  0.024514485  7.005556</span>
+<span class="co">#&gt; 8 2026-02-10   0.8451708 0.016812319  0.032098279 10.005556</span>
+<span class="co">#&gt; 9 2046-02-10   0.5147311 0.022132923  0.032098279 30.005556</span></code></pre></div>
+</div>
+<div id="generate-index-scenarios-and-fund-scenarios" class="section level2">
+<h2>Generate index scenarios and fund scenarios</h2>
+<p>In the following example, we first simulate the index movements using <em>genIndexScen()</em>. Three of the inputs to <em>genIndexScen()</em> are stored as default data under variable names “mCov”, “indexNames”, and “cForwardCurve” respectively. For illustration purposes, we will simulate 100 scenarios for 360 steps with a step length dT = 1/12 and seed = 1.</p>
+<p>The underlying model utilizes the <strong>multivariate Black-Scholes model</strong>. All the simulated index movements are stored in a <strong>3D-array</strong> with dimensions [number of Scenarios, number of Steps, number of Indices]</p>
+<div id="default-covariance-matrix" class="section level3">
+<h3>Default covariance matrix</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="right">US</th>
+<th align="right">SMALL</th>
+<th align="right">INT</th>
+<th align="right">FIXED</th>
+<th align="right">MONEY</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.15</td>
+<td align="right">0.0</td>
+<td align="right">0.00</td>
+<td align="right">0.000</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="right">0.00</td>
+<td align="right">0.2</td>
+<td align="right">0.00</td>
+<td align="right">0.000</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="right">0.00</td>
+<td align="right">0.0</td>
+<td align="right">0.17</td>
+<td align="right">0.000</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="even">
+<td align="right">0.00</td>
+<td align="right">0.0</td>
+<td align="right">0.00</td>
+<td align="right">0.029</td>
+<td align="right">0.0000</td>
+</tr>
+<tr class="odd">
+<td align="right">0.00</td>
+<td align="right">0.0</td>
+<td align="right">0.00</td>
+<td align="right">0.000</td>
+<td align="right">0.0061</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="default-index-names" class="section level3">
+<h3>Default index names</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Index Names</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">US</td>
+</tr>
+<tr class="even">
+<td align="left">SMALL</td>
+</tr>
+<tr class="odd">
+<td align="left">INT</td>
+</tr>
+<tr class="even">
+<td align="left">FIXED</td>
+</tr>
+<tr class="odd">
+<td align="left">MONEY</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="risk-neutral-path-simulation-for-5-indices" class="section level3">
+<h3>Risk-neutral path simulation for 5 indices</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We will show the index simulated path for five months of the first scenario </span>
+indexScen &lt;-<span class="st"> </span><span class="kw">genIndexScen</span>(mCov, <span class="dv">100</span>, <span class="dv">360</span>, indexNames, <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">12</span>, cForwardCurve, <span class="dv">1</span>)
+indexScen[<span class="dv">1</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, ]
+<span class="co">#&gt;           [,1]      [,2]      [,3]      [,4]      [,5]</span>
+<span class="co">#&gt; [1,] 0.9280933 0.7108209 1.0542468 1.0391611 1.0050411</span>
+<span class="co">#&gt; [2,] 1.0160765 1.1770017 0.9065351 0.9935556 0.9305910</span>
+<span class="co">#&gt; [3,] 0.9066403 0.9151064 1.2239807 1.0199796 0.9939919</span>
+<span class="co">#&gt; [4,] 1.1897872 0.9397168 0.9853616 1.0115470 1.0117871</span>
+<span class="co">#&gt; [5,] 1.0327826 0.9718774 0.8855638 1.0016170 0.9723979</span></code></pre></div>
+<p>Then we use <em>genFundScen()</em> to map the index movements to funds according to different allocations of capital using a fund map (stored as default data under variable “fundMap”). The fund movements are also stored in a 3D-array with dimension [number of Scenarios, number of Steps, number of Funds]</p>
+</div>
+<div id="risk-neutral-path-simulation-for-10-funds" class="section level3">
+<h3>Risk-neutral path simulation for 10 funds</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Again, we show the fund simulated path for five months of the first scenario </span>
+fundScen &lt;-<span class="st"> </span><span class="kw">genFundScen</span>(fundMap, indexScen)
+fundScen[<span class="dv">1</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, ]
+<span class="co">#&gt;           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]      [,7]</span>
+<span class="co">#&gt; [1,] 0.9280933 0.7108209 1.0542468 1.0391611 1.0050411 0.8411844 0.9911700</span>
+<span class="co">#&gt; [2,] 1.0160765 1.1770017 0.9065351 0.9935556 0.9305910 1.0804466 0.9613058</span>
+<span class="co">#&gt; [3,] 0.9066403 0.9151064 1.2239807 1.0199796 0.9939919 0.9100268 1.0653105</span>
+<span class="co">#&gt; [4,] 1.1897872 0.9397168 0.9853616 1.0115470 1.0117871 1.0897591 1.0875744</span>
+<span class="co">#&gt; [5,] 1.0327826 0.9718774 0.8855638 1.0016170 0.9723979 1.0084206 0.9591732</span>
+<span class="co">#&gt;           [,8]      [,9]     [,10]</span>
+<span class="co">#&gt; [1,] 0.9836272 0.9512190 0.9474726</span>
+<span class="co">#&gt; [2,] 1.0048160 0.9876751 1.0047520</span>
+<span class="co">#&gt; [3,] 0.9633100 1.1313184 1.0119398</span>
+<span class="co">#&gt; [4,] 1.1006671 0.9716682 1.0276399</span>
+<span class="co">#&gt; [5,] 1.0171998 0.9114579 0.9728478</span></code></pre></div>
+</div>
+</div>
+<div id="generate-a-synthetic-portfolio-of-variable-annuities" class="section level2">
+<h2>Generate a synthetic portfolio of variable annuities</h2>
+<p>Perhaps the most value-added step in this package is the generation of synthetic portfolio of variable annuities that has realistic charateristic features. Using the fuction <em>genPortInception()</em>, users can generate a synthetic variable annuity portfolio of desirable size. The function <em>genPortInception()</em> has certain predetermined default values based on the research in the package reference. We recommend users to change these default values, such as maturity and issue range, to match their portfolio characteristics. In the current version, there are a few constraints for the portfolio being generated: The issue range must be later than the first date of historical scenario; The maturity range should also be set after the valuation date to be meaningful.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># For illustration purposes, we will only simulate one guarantee contract for each of the 19 guarantee types. Please note that due to randomness the generated portfolio under this code block may not align with the default VAPort under lazy data.</span>
+<span class="kw">genPortInception</span>(<span class="dt">issueRng =</span> <span class="kw">c</span>(<span class="st">&quot;2001-08-01&quot;</span>, <span class="st">&quot;2014-01-01&quot;</span>), <span class="dt">numPolicy =</span>  <span class="dv">1</span>)
+<span class="co">#&gt;      recordID survivorShip gender productType  issueDate    matDate</span>
+<span class="co">#&gt; DBRP        1            1      F        DBRP 2013-04-01 2043-04-01</span>
+<span class="co">#&gt; DBRU        2            1      F        DBRU 2002-02-01 2018-02-01</span>
+<span class="co">#&gt; DBSU        3            1      F        DBSU 2005-09-01 2021-09-01</span>
+<span class="co">#&gt; ABRP        4            1      M        ABRP 2002-03-01 2030-03-01</span>
+<span class="co">#&gt; ABRU        5            1      M        ABRU 2009-01-01 2038-01-01</span>
+<span class="co">#&gt; ABSU        6            1      M        ABSU 2012-11-01 2035-11-01</span>
+<span class="co">#&gt; IBRP        7            1      F        IBRP 2012-03-01 2033-03-01</span>
+<span class="co">#&gt; IBRU        8            1      F        IBRU 2009-10-01 2039-10-01</span>
+<span class="co">#&gt; IBSU        9            1      M        IBSU 2002-04-01 2024-04-01</span>
+<span class="co">#&gt; MBRP       10            1      M        MBRP 2006-04-01 2036-04-01</span>
+<span class="co">#&gt; MBRU       11            1      M        MBRU 2006-04-01 2028-04-01</span>
+<span class="co">#&gt; MBSU       12            1      M        MBSU 2011-09-01 2041-09-01</span>
+<span class="co">#&gt; WBRP       13            1      F        WBRP 2003-09-01 2024-09-01</span>
+<span class="co">#&gt; WBRU       14            1      F        WBRU 2010-08-01 2029-08-01</span>
+<span class="co">#&gt; WBSU       15            1      M        WBSU 2010-03-01 2035-03-01</span>
+<span class="co">#&gt; DBAB       16            1      F        DBAB 2002-09-01 2031-09-01</span>
+<span class="co">#&gt; DBIB       17            1      F        DBIB 2004-05-01 2023-05-01</span>
+<span class="co">#&gt; DBMB       18            1      F        DBMB 2002-02-01 2031-02-01</span>
+<span class="co">#&gt; DBWB       19            1      F        DBWB 2012-03-01 2027-03-01</span>
+<span class="co">#&gt;       birthDate currentDate baseFee riderFee rollUpRate gbAmt gmwbBalance</span>
+<span class="co">#&gt; DBRP 1978-10-01  2013-04-01    0.02   0.0025      5e-04     0           0</span>
+<span class="co">#&gt; DBRU 1952-06-01  2002-02-01    0.02   0.0035      5e-04     0           0</span>
+<span class="co">#&gt; DBSU 1976-09-01  2005-09-01    0.02   0.0035      5e-04     0           0</span>
+<span class="co">#&gt; ABRP 1963-03-01  2002-03-01    0.02   0.0050      5e-04     0           0</span>
+<span class="co">#&gt; ABRU 1956-07-01  2009-01-01    0.02   0.0060      5e-04     0           0</span>
+<span class="co">#&gt; ABSU 1976-10-01  2012-11-01    0.02   0.0060      5e-04     0           0</span>
+<span class="co">#&gt; IBRP 1958-03-01  2012-03-01    0.02   0.0060      5e-04     0           0</span>
+<span class="co">#&gt; IBRU 1975-02-01  2009-10-01    0.02   0.0070      5e-04     0           0</span>
+<span class="co">#&gt; IBSU 1961-08-01  2002-04-01    0.02   0.0070      5e-04     0           0</span>
+<span class="co">#&gt; MBRP 1974-06-01  2006-04-01    0.02   0.0050      5e-04     0           0</span>
+<span class="co">#&gt; MBRU 1979-12-01  2006-04-01    0.02   0.0060      5e-04     0           0</span>
+<span class="co">#&gt; MBSU 1963-01-01  2011-09-01    0.02   0.0060      5e-04     0           0</span>
+<span class="co">#&gt; WBRP 1958-08-01  2003-09-01    0.02   0.0065      5e-04     0           0</span>
+<span class="co">#&gt; WBRU 1975-09-01  2010-08-01    0.02   0.0075      5e-04     0           0</span>
+<span class="co">#&gt; WBSU 1972-07-01  2010-03-01    0.02   0.0075      5e-04     0           0</span>
+<span class="co">#&gt; DBAB 1968-12-01  2002-09-01    0.02   0.0075      5e-04     0           0</span>
+<span class="co">#&gt; DBIB 1963-04-01  2004-05-01    0.02   0.0085      5e-04     0           0</span>
+<span class="co">#&gt; DBMB 1973-02-01  2002-02-01    0.02   0.0075      5e-04     0           0</span>
+<span class="co">#&gt; DBWB 1966-03-01  2012-03-01    0.02   0.0090      5e-04     0           0</span>
+<span class="co">#&gt;      wbWithdrawalRate withdrawal fundNum1 fundNum2 fundNum3 fundNum4</span>
+<span class="co">#&gt; DBRP            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; DBRU            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; DBSU            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; ABRP            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; ABRU            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; ABSU            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; IBRP            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; IBRU            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; IBSU            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; MBRP            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; MBRU            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; MBSU            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; WBRP            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; WBRU            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; WBSU            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; DBAB            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; DBIB            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; DBMB            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; DBWB            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt;      fundNum5 fundNum6 fundNum7 fundNum8 fundNum9 fundNum10 fundValue1</span>
+<span class="co">#&gt; DBRP        5        6        7        8        9        10       0.00</span>
+<span class="co">#&gt; DBRU        5        6        7        8        9        10       0.00</span>
+<span class="co">#&gt; DBSU        5        6        7        8        9        10       0.00</span>
+<span class="co">#&gt; ABRP        5        6        7        8        9        10       0.00</span>
+<span class="co">#&gt; ABRU        5        6        7        8        9        10       0.00</span>
+<span class="co">#&gt; ABSU        5        6        7        8        9        10   53946.32</span>
+<span class="co">#&gt; IBRP        5        6        7        8        9        10   15294.43</span>
+<span class="co">#&gt; IBRU        5        6        7        8        9        10   26752.47</span>
+<span class="co">#&gt; IBSU        5        6        7        8        9        10       0.00</span>
+<span class="co">#&gt; MBRP        5        6        7        8        9        10       0.00</span>
+<span class="co">#&gt; MBRU        5        6        7        8        9        10   48316.53</span>
+<span class="co">#&gt; MBSU        5        6        7        8        9        10   39784.12</span>
+<span class="co">#&gt; WBRP        5        6        7        8        9        10   19981.46</span>
+<span class="co">#&gt; WBRU        5        6        7        8        9        10   67683.52</span>
+<span class="co">#&gt; WBSU        5        6        7        8        9        10   21382.17</span>
+<span class="co">#&gt; DBAB        5        6        7        8        9        10       0.00</span>
+<span class="co">#&gt; DBIB        5        6        7        8        9        10   26108.78</span>
+<span class="co">#&gt; DBMB        5        6        7        8        9        10  144417.30</span>
+<span class="co">#&gt; DBWB        5        6        7        8        9        10   64632.67</span>
+<span class="co">#&gt;      fundValue2 fundValue3 fundValue4 fundValue5 fundValue6 fundValue7</span>
+<span class="co">#&gt; DBRP  248464.93       0.00       0.00       0.00       0.00       0.00</span>
+<span class="co">#&gt; DBRU   15226.72   15226.72   15226.72       0.00   15226.72   15226.72</span>
+<span class="co">#&gt; DBSU  363370.26       0.00       0.00       0.00       0.00       0.00</span>
+<span class="co">#&gt; ABRP  137737.66       0.00       0.00       0.00       0.00       0.00</span>
+<span class="co">#&gt; ABRU       0.00       0.00       0.00   61639.49       0.00   61639.49</span>
+<span class="co">#&gt; ABSU   53946.32       0.00   53946.32   53946.32       0.00   53946.32</span>
+<span class="co">#&gt; IBRP       0.00       0.00   15294.43       0.00   15294.43       0.00</span>
+<span class="co">#&gt; IBRU   26752.47   26752.47   26752.47   26752.47   26752.47   26752.47</span>
+<span class="co">#&gt; IBSU   50889.49       0.00   50889.49       0.00       0.00   50889.49</span>
+<span class="co">#&gt; MBRP  116634.59       0.00       0.00       0.00       0.00       0.00</span>
+<span class="co">#&gt; MBRU   48316.53   48316.53   48316.53   48316.53   48316.53   48316.53</span>
+<span class="co">#&gt; MBSU   39784.12   39784.12       0.00       0.00       0.00   39784.12</span>
+<span class="co">#&gt; WBRP   19981.46   19981.46   19981.46   19981.46   19981.46   19981.46</span>
+<span class="co">#&gt; WBRU       0.00   67683.52       0.00   67683.52       0.00   67683.52</span>
+<span class="co">#&gt; WBSU   21382.17   21382.17   21382.17   21382.17       0.00   21382.17</span>
+<span class="co">#&gt; DBAB       0.00  332019.56       0.00       0.00       0.00       0.00</span>
+<span class="co">#&gt; DBIB   26108.78       0.00   26108.78   26108.78   26108.78   26108.78</span>
+<span class="co">#&gt; DBMB       0.00       0.00       0.00       0.00       0.00       0.00</span>
+<span class="co">#&gt; DBWB       0.00   64632.67   64632.67   64632.67   64632.67       0.00</span>
+<span class="co">#&gt;      fundValue8 fundValue9 fundValue10 fundFee1 fundFee2 fundFee3 fundFee4</span>
+<span class="co">#&gt; DBRP  248464.93       0.00        0.00    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; DBRU   15226.72   15226.72    15226.72    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; DBSU       0.00       0.00        0.00    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; ABRP       0.00       0.00        0.00    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; ABRU   61639.49       0.00    61639.49    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; ABSU       0.00       0.00    53946.32    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; IBRP   15294.43   15294.43        0.00    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; IBRU   26752.47   26752.47        0.00    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; IBSU       0.00       0.00    50889.49    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; MBRP  116634.59       0.00        0.00    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; MBRU       0.00   48316.53    48316.53    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; MBSU       0.00   39784.12        0.00    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; WBRP   19981.46   19981.46    19981.46    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; WBRU       0.00       0.00    67683.52    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; WBSU   21382.17       0.00    21382.17    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; DBAB       0.00       0.00        0.00    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; DBIB       0.00   26108.78    26108.78    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; DBMB       0.00       0.00        0.00    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; DBWB       0.00       0.00    64632.67    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt;      fundFee5 fundFee6 fundFee7 fundFee8 fundFee9 fundFee10</span>
+<span class="co">#&gt; DBRP    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; DBRU    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; DBSU    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; ABRP    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; ABRU    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; ABSU    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; IBRP    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; IBRU    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; IBSU    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; MBRP    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; MBRU    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; MBSU    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; WBRP    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; WBRU    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; WBSU    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; DBAB    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; DBIB    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; DBMB    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; DBWB    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span></code></pre></div>
+</div>
+<div id="monte-carlo-valuation" class="section level2">
+<h2>Monte Carlo Valuation</h2>
+<p>After generating the above required elements for Monte Carlo valuation, we can now proceed to calculate the fair market price of the portfolio by calling the function <em>valuatePortfolio()</em>. Under the current version of the package, all the annuity contracts in the portfolio are assumed to be valuated on the same date, i.e. the first date of our simulated fund scenario. Users can either use the default mortality table by calling “mortTable”, or input a mortality table to project liability cash flows.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># In this vignette, we will arbitrarily use the first two scenarios from fundSen to valuate a portfolio of two guarantees to speed up the execution of the example.</span>
+<span class="co"># The input cForwardCurve is a vector of 0.02 with dimension 360. It could also be a forward curve calculated using the buildCurve() function.</span>
+<span class="kw">valuatePortfolio</span>(VAPort[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, ], mortTable, fundScen[<span class="dv">1</span>, , ], <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">12</span>, cForwardCurve)
+<span class="co">#&gt; $portVal</span>
+<span class="co">#&gt; [1] 0</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $portRC</span>
+<span class="co">#&gt; [1] 597.3302</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $vecVal</span>
+<span class="co">#&gt; [1] 0 0</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $vecRC</span>
+<span class="co">#&gt; [1] 347.5886 249.7416</span></code></pre></div>
+<p>Note that users can also “age” the portfolio, calling the function <em>agePortfolio()</em>, to a particular valuatioon date by incorporating the historical fund movements prior to that date.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Again, we will arbitrarily age a portfolio of two guarantees to speed up the execution.</span>
+targetDate &lt;-<span class="st"> &quot;2016-01-01&quot;</span>
+<span class="co"># Here we generate historical fund scenarios using default index data stored under &quot;histIdxScen&quot;</span>
+histFundScen &lt;-<span class="st"> </span><span class="kw">genFundScen</span>(fundMap, histIdxScen)
+<span class="co"># Perform aging</span>
+<span class="kw">agePortfolio</span>(VAPort[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, ], mortTable, histFundScen, histDates, <span class="dt">dT =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">12</span>, targetDate, cForwardCurve)
+<span class="co">#&gt;      recordID survivorShip gender productType  issueDate    matDate</span>
+<span class="co">#&gt; DBRP        1            1      M        DBRP 2010-11-01 2036-11-01</span>
+<span class="co">#&gt; DBRU        2            1      M        DBRU 2013-02-01 2034-02-01</span>
+<span class="co">#&gt;       birthDate currentDate baseFee riderFee rollUpRate gbAmt gmwbBalance</span>
+<span class="co">#&gt; DBRP 1965-07-01  2016-01-01    0.02   0.0025      5e-04     0           0</span>
+<span class="co">#&gt; DBRU 1969-11-01  2016-01-01    0.02   0.0035      5e-04     0           0</span>
+<span class="co">#&gt;      wbWithdrawalRate withdrawal fundNum1 fundNum2 fundNum3 fundNum4</span>
+<span class="co">#&gt; DBRP            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt; DBRU            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt;      fundNum5 fundNum6 fundNum7 fundNum8 fundNum9 fundNum10 fundValue1</span>
+<span class="co">#&gt; DBRP        5        6        7        8        9        10   120788.3</span>
+<span class="co">#&gt; DBRU        5        6        7        8        9        10        0.0</span>
+<span class="co">#&gt;      fundValue2 fundValue3 fundValue4 fundValue5 fundValue6 fundValue7</span>
+<span class="co">#&gt; DBRP  135115.39   90082.35   56505.24   47943.95   126814.8       0.00</span>
+<span class="co">#&gt; DBRU   54975.59       0.00   44099.64   42005.60        0.0   51996.72</span>
+<span class="co">#&gt;      fundValue8 fundValue9 fundValue10 fundFee1 fundFee2 fundFee3 fundFee4</span>
+<span class="co">#&gt; DBRP       0.00   103083.3    85152.89    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt; DBRU   51055.69        0.0        0.00    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt;      fundFee5 fundFee6 fundFee7 fundFee8 fundFee9 fundFee10</span>
+<span class="co">#&gt; DBRP    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span>
+<span class="co">#&gt; DBRU    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span></code></pre></div>
+</div>
+<div id="closing-remarks" class="section level2">
+<h2>Closing Remarks</h2>
+<p>Though the primary purpose of this package is to valuate a portfolio of variable annuities, users can also use the <em>valuateOnePolicy()</em> and the <em>ageOnePolicy()</em> functions to perform fair market valuation on a single variable annuity as demonstrated below.</p>
+<div id="valuation-of-one-variable-annuity" class="section level3">
+<h3>Valuation of one variable annuity</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exPolicy &lt;-<span class="st"> </span>VAPort[<span class="dv">1</span>, ]
+<span class="kw">valuateOnePolicy</span>(exPolicy, mortTable, fundScen[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, , ], <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">12</span>, cForwardCurve)
+<span class="co">#&gt; $policyValue</span>
+<span class="co">#&gt; [1] 0</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $riskCharge</span>
+<span class="co">#&gt; [1] 454.1419</span></code></pre></div>
+</div>
+<div id="aging-of-one-variable-annuity" class="section level3">
+<h3>Aging of one variable annuity</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Similarly, users can age this single policy before pricing it. We use the same target date and historical fund scenario as generated before</span>
+exPolicy &lt;-<span class="st"> </span>VAPort[<span class="dv">1</span>, ]
+<span class="kw">ageOnePolicy</span>(exPolicy, mortTable, histFundScen, histDates, <span class="dt">dT =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">12</span>, targetDate, cForwardCurve)
+<span class="co">#&gt;      recordID survivorShip gender productType  issueDate    matDate</span>
+<span class="co">#&gt; DBRP        1            1      M        DBRP 2010-11-01 2036-11-01</span>
+<span class="co">#&gt;       birthDate currentDate baseFee riderFee rollUpRate gbAmt gmwbBalance</span>
+<span class="co">#&gt; DBRP 1965-07-01  2016-01-01    0.02   0.0025      5e-04     0           0</span>
+<span class="co">#&gt;      wbWithdrawalRate withdrawal fundNum1 fundNum2 fundNum3 fundNum4</span>
+<span class="co">#&gt; DBRP            5e-04          0        1        2        3        4</span>
+<span class="co">#&gt;      fundNum5 fundNum6 fundNum7 fundNum8 fundNum9 fundNum10 fundValue1</span>
+<span class="co">#&gt; DBRP        5        6        7        8        9        10   120788.3</span>
+<span class="co">#&gt;      fundValue2 fundValue3 fundValue4 fundValue5 fundValue6 fundValue7</span>
+<span class="co">#&gt; DBRP   135115.4   90082.35   56505.24   47943.95   126814.8          0</span>
+<span class="co">#&gt;      fundValue8 fundValue9 fundValue10 fundFee1 fundFee2 fundFee3 fundFee4</span>
+<span class="co">#&gt; DBRP          0   103083.3    85152.89    0.003    0.005    0.006    0.008</span>
+<span class="co">#&gt;      fundFee5 fundFee6 fundFee7 fundFee8 fundFee9 fundFee10</span>
+<span class="co">#&gt; DBRP    0.001   0.0038   0.0045   0.0055   0.0047    0.0046</span></code></pre></div>
+</div>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
