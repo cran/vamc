@@ -8,8 +8,7 @@ numScen scenarios. Covariances among indices are specified in covMatrix.
 Stepsize is given is dT and interpolated discount factors are given in vDF.
 Random seed is optional for reproducibility.}
 \usage{
-genIndexScen(covMatrix, numScen, numStep, indexNames, dT, forwardCurve,
-  seed)
+genIndexScen(covMatrix, numScen, numStep, indexNames, dT, forwardCurve, seed)
 }
 \arguments{
 \item{covMatrix}{A numIndex-by-numIndex matrix of doubles of covariances

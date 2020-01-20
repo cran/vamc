@@ -3,7 +3,6 @@
 \docType{package}
 \name{vamc}
 \alias{vamc}
-\alias{vamc-package}
 \title{vamc: A package for pricing a pool of variable annuities.}
 \description{
 The vamc package provides a Monte Carlo engine for valuating a pool of

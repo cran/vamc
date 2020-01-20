@@ -4,8 +4,19 @@
 \alias{buildCurve}
 \title{Bootstrap discount factors from a yield curve.}
 \usage{
-buildCurve(swapRates, tenors, fixFreq, fixDCC, fltFreq, fltDCC, calendar,
-  bdc, curveDate, numSetDay, yieldCurveDCC)
+buildCurve(
+  swapRates,
+  tenors,
+  fixFreq,
+  fixDCC,
+  fltFreq,
+  fltDCC,
+  calendar,
+  bdc,
+  curveDate,
+  numSetDay,
+  yieldCurveDCC
+)
 }
 \arguments{
 \item{swapRates}{A vector of doubles of swap rates.}

@@ -1,6 +1,7 @@
 context("randomly simulated portfolio of variable annuities")
 library(vamc)
 
+if(capabilities("long.double")) {
 test_that("congruence test for default portfolio setting", {
   expect_port_equal <- function(seed) {
     set.seed(1)
@@ -35,3 +36,4 @@ test_that("Test for user errors", {
   expect_error(genPortInception(numPolicy = 0),
                "Please input numPolicy > 0")
 })
+}

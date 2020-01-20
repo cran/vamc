@@ -8,8 +8,15 @@ given in fundScen. The time step length is specified in dT.
 Here we input a rather irrelevant parameter df to "hack" for a more flexible
 user-defined projection function.}
 \usage{
-agePortfolio(inPortfolio, mortTable, fundScen, scenDates, dT = 1/12,
-  targetDate, df)
+agePortfolio(
+  inPortfolio,
+  mortTable,
+  fundScen,
+  scenDates,
+  dT = 1/12,
+  targetDate,
+  df
+)
 }
 \arguments{
 \item{inPortfolio}{A dataframe containing numPolicy rows and 45 attributes

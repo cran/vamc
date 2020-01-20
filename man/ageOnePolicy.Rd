@@ -8,8 +8,15 @@ The time step length is specified in dT.
 Here we input a rather irrelevant parameter df to "hack" for a more
 flexible user-defined projection function.}
 \usage{
-ageOnePolicy(inPolicy, mortTable, fundScen, scenDates, dT = 1/12,
-  targetDate, df)
+ageOnePolicy(
+  inPolicy,
+  mortTable,
+  fundScen,
+  scenDates,
+  dT = 1/12,
+  targetDate,
+  df
+)
 }
 \arguments{
 \item{inPolicy}{A vector containing 45 attributes of a VA policy,

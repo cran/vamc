@@ -1,6 +1,6 @@
 ---
 title: "A Comprehensive Monte Carlo Valuation of Variable Annuities"
-author: "Hengxin Li, Mingbin Feng"
+author: "Hengxin Li, Mingbin Feng, Mingyi Jiang"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -86,7 +86,9 @@ We recommend users to change these default values, such as maturity and issue ra
 
 ```{r}
 # For illustration purposes, we will only simulate one guarantee contract for each of the 19 guarantee types. Please note that due to randomness the generated portfolio under this code block may not align with the default VAPort under lazy data.
+if(capabilities("long.double")) {
 genPortInception(issueRng = c("2001-08-01", "2014-01-01"), numPolicy =  1)
+}
 
 ```
 

@@ -1,12 +1,14 @@
 Package: vamc
 Type: Package
 Title: A Monte Carlo Valuation Framework for Variable Annuities
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Hengxin", "Li", email = "h343li@uwaterloo.ca", 
     role = c("aut", "cph")),
     person("Ben", "Feng", email = "ben.feng@uwaterloo.ca", 
-    role = c("aut", "cph", "cre")),
+    role = c("aut", "cph")),
+    person("Mingyi", "Jiang", email = "m64jiang@uwaterloo.ca", 
+    role = c("aut" , "cph", "cre")),
     person("GuoJun", "Gan", email = "Guojun.Gan@uconn.edu", 
     role = c("ctb")))
 Description: Implementation of a Monte Carlo simulation engine for valuing synthetic portfolios of 
@@ -19,14 +21,16 @@ License: GPL-2
 LazyData: true
 Suggests: knitr, rmarkdown, testthat
 VignetteBuilder: knitr
-RoxygenNote: 6.1.0
+RoxygenNote: 7.0.2
 Imports: stats (>= 3.3.0), utils (>= 3.3.0), Rdpack (>= 0.4)
 RdMacros: Rdpack
 NeedsCompilation: no
-Packaged: 2018-10-01 16:23:19 UTC; thecoolestman
-Author: Hengxin Li [aut, cph],
-  Ben Feng [aut, cph, cre],
-  GuoJun Gan [ctb]
-Maintainer: Ben Feng <ben.feng@uwaterloo.ca>
+Packaged: 2020-01-19 18:19:53 UTC; Iris
+Encoding: UTF-8
 Repository: CRAN
-Date/Publication: 2018-10-08 18:30:03 UTC
+Author: Hengxin Li [aut, cph],
+  Ben Feng [aut, cph],
+  Mingyi Jiang [aut, cph, cre],
+  GuoJun Gan [ctb]
+Maintainer: Mingyi Jiang <m64jiang@uwaterloo.ca>
+Date/Publication: 2020-01-20 09:30:02 UTC
