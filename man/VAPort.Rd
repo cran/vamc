@@ -3,7 +3,7 @@
 \docType{data}
 \name{VAPort}
 \alias{VAPort}
-\title{A randomly generated pool of variable annuities}
+\title{A Randomly Generated Pool of Variable Annuities}
 \format{A data frame with 19 row and 45 columns:
 \describe{
   \item{recordID}{Unique identifier of the policy}

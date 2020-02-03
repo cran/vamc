@@ -2,7 +2,9 @@
 # ----- Step3_PolicyGeneration.R -----------------------------------------------
 # ------------------------------------------------------------------------------
 
-#' Generate a portfolio of VA contracts at inception based on given attribute
+#' Generate Portfolio at Inception
+#' 
+#' @description Generate a portfolio of VA contracts at inception based on given attribute
 #' ranges and investment fund information.
 #'
 #' @param birthDayRng A vector of two strings in 'YYYY-MM-DD' of birthday range.
@@ -28,6 +30,10 @@
 #' c(15, 30), c(5e4, 5e5), 0.4, c(30, 50, 60, 80, 10, 38, 45, 55, 47, 46),
 #' 200, rep(1 / 4, 4), c("WBRP", "WBRU", "WBSU", "DBWB"),
 #' riderFee = c(25, 35, 35, 50), rep(5, 4), rep(5, 4), 100)
+#' \dontrun{
+#' genPortInception()
+#' }
+#' 
 #' @importFrom stats runif
 #' @export
 genPortInception <- function(birthDayRng = c("1950-01-01", "1980-01-01"),

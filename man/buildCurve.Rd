@@ -2,20 +2,21 @@
 % Please edit documentation in R/Step1_YieldCurveGeneration.R
 \name{buildCurve}
 \alias{buildCurve}
-\title{Bootstrap discount factors from a yield curve.}
+\title{Build Curve}
 \usage{
 buildCurve(
   swapRates,
   tenors,
-  fixFreq,
-  fixDCC,
-  fltFreq,
-  fltDCC,
-  calendar,
-  bdc,
+  fixFreq = 6,
+  fixDCC = "Thirty360",
+  fltFreq = 6,
+  fltDCC = "Thirty360",
+  calendar = "General",
+  bdc = c("Actual", "Preceding", "Following", "Modified_Prec", "Modified_Foll"),
   curveDate,
   numSetDay,
-  yieldCurveDCC
+  yieldCurveDCC = "Thirty360",
+  holidays = NULL
 )
 }
 \arguments{
@@ -23,27 +24,56 @@ buildCurve(
 
 \item{tenors}{A vector of integers of corresponding tenors.}
 
-\item{fixFreq}{An integer of fixed leg frequency of payment in months.}
+\item{fixFreq}{An integer of fixed leg frequency of payment in months. 
+
+   Default is 6, semi-annual payments.}
 
 \item{fixDCC}{A string of fixed leg day count convention from four options:
-"Thirty360", "ACT360", "ACT365", or "ACTACT".}
+"Thirty360", "ACT360", "ACT365", or "ACTACT". 
 
-\item{fltFreq}{An integer of floating leg frequency of payment in months.}
+Default is "Thirty360".}
+
+\item{fltFreq}{An integer of floating leg frequency of payment in months. 
+
+Default is 6, semi-annual payments.}
 
 \item{fltDCC}{A string of floating leg day count convention from four options:
-"Thirty360", "ACT360", "ACT365", or "ACTACT".}
+"Thirty360", "ACT360", "ACT365", or "ACTACT". 
 
-\item{calendar}{A string of the desired calendar convention.}
+Default is "Thirty360".}
 
-\item{bdc}{A string of business day convention from two options:
-"General" or "NY".}
+\item{calendar}{A string of the desired calendar convention 
+from two options:
+\itemize{
+ \item "NY": New York holiday calendar
+ \item "General": all weekdays are business days
+}}
+
+\item{bdc}{A string of business day convention from five options: 
+\itemize{
+  \item "Actual": No rolling on the date applied even if it is a non-business day
+  \item "Preceding": 1st business day before holiday
+  \item "Following": 1st business day after holiday
+  \item "Modified_Prec": Same as "Preceding" unless it belongs to a different
+                     month, in which case 1st business day after holiday
+  \item "Modified_Foll": Same as "Following" unless it belongs to a different
+                     month, in which case 1st business day before holiday
+ }
+ Default is "Actual".}
 
 \item{curveDate}{A string in the format of "YYYY-MM-DD" of yield curve date.}
 
 \item{numSetDay}{An integer of settlement days from yield curve date.}
 
 \item{yieldCurveDCC}{A string of yield curve day count convention from four options:
-"Thirty360", "ACT360", "ACT365", or "ACTACT".}
+"Thirty360", "ACT360", "ACT365", or "ACTACT". Default is "Thirty360".}
+
+\item{holidays}{An optional vector dates of user-defined holidays. If provided, 
+within the given holidays range, the calendar provided in the parameter "calendar" 
+will not be applied; 
+
+If the date is not in the given holidays range, it will follow the calendar provided in
+the "calendar" parameter}
 }
 \value{
 Outputs a data frame of strings of discount dates and doubles of
@@ -64,6 +94,7 @@ bdc <- "Modified_Foll"
 curveDate <- "2016-02-08"
 numSetDay <- 2
 yieldCurveDCC <- "Thirty360"
+holidays <- NULL
 buildCurve(rate, tenor, fixFreq, fixDCC, fltFreq, fltDCC, calendar, bdc,
-           curveDate, numSetDay, yieldCurveDCC)
+           curveDate, numSetDay, yieldCurveDCC, holidays)
 }

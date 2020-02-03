@@ -3,7 +3,7 @@
 \docType{data}
 \name{cForwardCurve}
 \alias{cForwardCurve}
-\title{Constant forward curve}
+\title{Constant Forward Curve}
 \format{A vector with 360 elements:
 \describe{
   \item{rate}{discount rate}

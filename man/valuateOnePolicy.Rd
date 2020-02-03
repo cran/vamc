@@ -2,9 +2,7 @@
 % Please edit documentation in R/Step4_MonteCarloValuation.R
 \name{valuateOnePolicy}
 \alias{valuateOnePolicy}
-\title{Valuate a VA policy specified in inPolicy based on the simulated fund
-scenarios fundScen. The time step length is specified in dT and the
-discount rate for each period is specified in df.}
+\title{Valuate One Policy}
 \usage{
 valuateOnePolicy(inPolicy, mortTable, fundScen, dT, df)
 }

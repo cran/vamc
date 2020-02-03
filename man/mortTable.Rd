@@ -3,7 +3,7 @@
 \docType{data}
 \name{mortTable}
 \alias{mortTable}
-\title{Mortality rate for male and female from ages 5 to 115}
+\title{Mortality Rate for Male and Female from Ages 5 to 115}
 \format{A data frame with 110 rows and 3 columns:
 \describe{
   \item{age}{individual's age}

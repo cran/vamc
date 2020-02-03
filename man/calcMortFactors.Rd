@@ -2,10 +2,7 @@
 % Please edit documentation in R/Step4_MonteCarloValuation.R
 \name{calcMortFactors}
 \alias{calcMortFactors}
-\title{Calculates the mortality factors (t - 1)px q(x + t - 1) and tpx required to
-valuate the inPolicy. Extract gender, age (birth date & current date),
-valuation date (current date), and maturity date from inPolicy, mortality
-rates from mortTable.}
+\title{Calculate Mortality Factors}
 \usage{
 calcMortFactors(inPolicy, mortTable, dT = 1/12)
 }

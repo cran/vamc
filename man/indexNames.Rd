@@ -3,7 +3,7 @@
 \docType{data}
 \name{indexNames}
 \alias{indexNames}
-\title{Index names}
+\title{Index Names}
 \format{A vector with 5 elements:
 \describe{
   \item{name}{name of the index}

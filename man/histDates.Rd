@@ -3,7 +3,7 @@
 \docType{data}
 \name{histDates}
 \alias{histDates}
-\title{Historical scenario dates}
+\title{Historical Scenario Dates}
 \format{A vector with 175 elements:
 \describe{
   \item{date}{each observation date of the historical scenarios}

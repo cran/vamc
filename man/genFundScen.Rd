@@ -2,8 +2,7 @@
 % Please edit documentation in R/Step2_ScenarioGeneration.R
 \name{genFundScen}
 \alias{genFundScen}
-\title{Calculate numScen-by-numIndex-by-numStep fund scenarios based on given index
-scenarios indexScen and fund map fundMap that maps indices to funds.}
+\title{Generate Fund Scenerio}
 \usage{
 genFundScen(fundMap, indexScen)
 }

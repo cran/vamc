@@ -2,10 +2,7 @@
 % Please edit documentation in R/Step4_MonteCarloValuation.R
 \name{valuatePortfolio}
 \alias{valuatePortfolio}
-\title{Valuate a portfolio VA policies specified in each curPolicy of inPortfolio
-based on the simulated fund scenarios fundScen.
-The time step length is specified in dT and the discount rate for each period
-is specified in df.}
+\title{Valuate a Portfolio}
 \usage{
 valuatePortfolio(inPortfolio, mortTable, fundScen, dT, df)
 }

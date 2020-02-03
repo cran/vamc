@@ -20,7 +20,7 @@ variable annuities. Users may obtain a more robust valuation result by increasin
 the amount of risk-neutral scenarios.
 
 ## Yield Curve Generation
-In this step, we exploit Newton's method to calculate discount factors and forward rates at different tenor based on given swap rates using _buildCurve()_.
+In this step, we exploit Secant method to calculate discount factors and forward rates at different tenor based on given swap rates using _buildCurve()_.
 
 ```{r, echo = FALSE}
   knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
@@ -35,14 +35,17 @@ fixFreq <- 6
 fixDCC <- "Thirty360"
 fltFreq <- 6
 fltDCC <- "ACT360"
-calendar <- "NY"
+calendar <- "General"
 bdc <- "Modified_Foll"
 curveDate <- "2016-02-08"
 numSetDay <- 2
 yieldCurveDCC <- "Thirty360"
+holidays <- NULL
+
 # Bootstrap a forward curve 
 buildCurve(swap, tenor, fixFreq, fixDCC, fltFreq, fltDCC, calendar, bdc,
-            curveDate, numSetDay, yieldCurveDCC)
+            curveDate, numSetDay, yieldCurveDCC, holidays)
+
 ```
 
 ## Generate index scenarios and fund scenarios

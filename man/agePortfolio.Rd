@@ -2,11 +2,7 @@
 % Please edit documentation in R/Step4_MonteCarloValuation.R
 \name{agePortfolio}
 \alias{agePortfolio}
-\title{Age a portfolio of VA policies specified in each inPolicy of inPortfolio from
-currentDate (specified in inPolicy) to targetDate. The againg scenario is
-given in fundScen. The time step length is specified in dT.
-Here we input a rather irrelevant parameter df to "hack" for a more flexible
-user-defined projection function.}
+\title{Age a Portfolio}
 \usage{
 agePortfolio(
   inPortfolio,

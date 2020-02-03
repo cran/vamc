@@ -23,7 +23,9 @@ readMortTable <- function(dirFileName, header = T){
 }
 
 # ------------------------------------------------------------------------------
-#' Calculates the mortality factors (t - 1)px q(x + t - 1) and tpx required to
+#' Calculate Mortality Factors
+#' 
+#' @description Calculates the mortality factors (t - 1)px q(x + t - 1) and tpx required to
 #' valuate the inPolicy. Extract gender, age (birth date & current date),
 #' valuation date (current date), and maturity date from inPolicy, mortality
 #' rates from mortTable.
@@ -58,7 +60,7 @@ calcMortFactors <- function(inPolicy, mortTable, dT = 1 / 12){
       (matDate$mon - birDate$mon)
     ageCur <- monBirCur / 12              # age at current date
     x0 <- floor(ageCur)                 # integer age at current date
-    t0 <- ageCur / 12 - x0              # fractional age at current date
+    t0 <- ageCur - x0              # fractional age at current date
     xT <- floor(monMatCur / 12)     # integer age after numStep periods
 
     gender <- ifelse(inPolicy[1, "gender"] == "F", "female", "male")
@@ -1562,7 +1564,9 @@ projectDBWB <- function(inPolicy, oneFundScen, dT = 1 / 12, pq, p, df){
 }
 
 # ------------------------------------------------------------------------------
-#' Valuate a VA policy specified in inPolicy based on the simulated fund
+#' Valuate One Policy
+#' 
+#' @description Valuate a VA policy specified in inPolicy based on the simulated fund
 #' scenarios fundScen. The time step length is specified in dT and the
 #' discount rate for each period is specified in df.
 #' @param inPolicy A vector containing 45 attributes of a VA policy,
@@ -1645,7 +1649,9 @@ valuateOnePolicy <- function(inPolicy, mortTable, fundScen, dT, df){
 }
 
 # ------------------------------------------------------------------------------
-#' Age a VA policy specified in inPolicy from currentDate (specified in
+#' Age One Policy
+#'
+#' @description Age a VA policy specified in inPolicy from currentDate (specified in
 #' inPolicy) to targetDate. The againg scenario is given in fundScen.
 #' The time step length is specified in dT.
 #' Here we input a rather irrelevant parameter df to "hack" for a more
@@ -1745,7 +1751,9 @@ historical scenario date 2001-08-01"
 }
 
 # ------------------------------------------------------------------------------
-#' Valuate a portfolio VA policies specified in each curPolicy of inPortfolio
+#' Valuate a Portfolio
+#' 
+#' @description Valuate a portfolio VA policies specified in each curPolicy of inPortfolio
 #' based on the simulated fund scenarios fundScen.
 #' The time step length is specified in dT and the discount rate for each period
 #' is specified in df.
@@ -1781,7 +1789,9 @@ valuatePortfolio <- function(inPortfolio, mortTable, fundScen, dT, df){
 }
 
 # ------------------------------------------------------------------------------
-#' Age a portfolio of VA policies specified in each inPolicy of inPortfolio from
+#' Age a Portfolio
+#' 
+#' @description Age a portfolio of VA policies specified in each inPolicy of inPortfolio from
 #' currentDate (specified in inPolicy) to targetDate. The againg scenario is
 #' given in fundScen. The time step length is specified in dT.
 #' Here we input a rather irrelevant parameter df to "hack" for a more flexible

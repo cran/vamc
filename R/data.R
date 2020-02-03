@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 
-#' Constant forward curve
+#' Constant Forward Curve
 #'
 #' A dataset containing 2 percent continuously compounded annual interest rate
 #' for illustration purposes.
@@ -14,7 +14,7 @@
 
 # ------------------------------------------------------------------------------
 
-#' Fund map for 10 funds
+#' Fund Map for 10 Funds
 #'
 #' A dataset containing a default mapping from five indices to ten different
 #' funds.
@@ -29,7 +29,7 @@
 
 # ------------------------------------------------------------------------------
 
-#' covariance matrix for 5 indices
+#' Covariance Matrix for 5 Indices
 #'
 #' A dataset containing the covariance matrix among the returns of five indices.
 #'
@@ -42,7 +42,7 @@
 
 # ------------------------------------------------------------------------------
 
-#' 5 indices for 10 scenarios over 360 months
+#' 5 Indices for 10 Scenarios over 360 Months
 #'
 #' A dataset containing a 3D array, number of scenarios (10) by
 #' number of indices (5) by number of time steps (360), of Black-Scholes return
@@ -60,7 +60,7 @@
 
 # ------------------------------------------------------------------------------
 
-#' Historical scenario dates
+#' Historical Scenario Dates
 #'
 #' A dataset containing the dates at which historical returns for different
 #' indices were observed.
@@ -74,7 +74,7 @@
 
 # ------------------------------------------------------------------------------
 
-#' Historical index scenario for 5 indices over 175 months
+#' Historical Index Scenario for 5 Indices over 175 Months
 #'
 #' A dataset containing a matrix, number of indices (5) by
 #' number of time steps (175), of observed historical returns
@@ -96,7 +96,7 @@
 
 # ------------------------------------------------------------------------------
 
-#' Index names
+#' Index Names
 #'
 #' A dataset containing names for each index.
 #'
@@ -109,7 +109,7 @@
 
 # ------------------------------------------------------------------------------
 
-#' Mortality rate for male and female from ages 5 to 115
+#' Mortality Rate for Male and Female from Ages 5 to 115
 #'
 #' A dataset containing the mortality rates for male and female from ages 5
 #' to 115 (table IAM 1996 from the Society of Actuaries).
@@ -127,7 +127,7 @@
 
 # ------------------------------------------------------------------------------
 
-#' Swap rates across 30 years
+#' Swap Rates across 30 Years
 #'
 #' A dataset containing US swap rates for various maturities.
 #'
@@ -143,7 +143,7 @@
 
 # ------------------------------------------------------------------------------
 
-#' A randomly generated pool of variable annuities
+#' A Randomly Generated Pool of Variable Annuities
 #'
 #' A dataset containing information of the policy and the policy holder.
 #'

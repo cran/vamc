@@ -2,7 +2,9 @@
 # ----- Step2_ScenarioGeneration.R ---------------------------------------------
 # ------------------------------------------------------------------------------
 
-#' Simulate a 3D array, numScen by numIndex by numStep, of Black-Scholes return
+#' Generate Index Scenerio
+#' 
+#' @description  Simulate a 3D array, numScen by numIndex by numStep, of Black-Scholes return
 #' factors for numIndex indices in each of numStep time steps and each of
 #' numScen scenarios. Covariances among indices are specified in covMatrix.
 #' Stepsize is given is dT and interpolated discount factors are given in vDF.
@@ -101,7 +103,10 @@ rFundMap <- function(indexNames, numFund){
 }
 
 # ------------------------------------------------------------------------------
-#' Calculate numScen-by-numIndex-by-numStep fund scenarios based on given index
+#' 
+#' Generate Fund Scenerio
+#' 
+#' @description Calculate numScen-by-numIndex-by-numStep fund scenarios based on given index
 #' scenarios indexScen and fund map fundMap that maps indices to funds.
 #'
 #' @param fundMap A numFund-by-numIndex matrix of doubles,

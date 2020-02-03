@@ -28,10 +28,19 @@ test_that("Test the error message when business day count is invalid", {
   expect_error(buildCurve(rate, tenor, fixFreq, fixDCC, fltFreq, fltDCC,
                           calendar, bdc, curveDate, numSetDay,
                           yieldCurveDCC)$forwardCurve,
-               "Day count convention should be one of Following,
+               "Business day convention should be one of Actual, Following,
                           Preceding, Modified_Prec, or Modified_Foll.
                           Given Invalid type.")
 })
+
+test_that("Test the error message when user-defined holidays is invalid", {
+  holidays <- c("Invaild type")
+  expect_error(buildCurve(rate, tenor, fixFreq, fixDCC, fltFreq, fltDCC,
+                          calendar, bdc, curveDate, numSetDay,
+                          yieldCurveDCC, holidays)$forwardCurve,
+               "Holidays should be date type, given character type.")
+})
+
 
 test_that("Test the error message when floating/fixed day count is invalid", {
   fixDCC <- "Invalid"

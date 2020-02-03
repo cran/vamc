@@ -3,7 +3,7 @@
 \docType{data}
 \name{fundMap}
 \alias{fundMap}
-\title{Fund map for 10 funds}
+\title{Fund Map for 10 Funds}
 \format{A matrix with 10 rows and 5 columns:
 \describe{
   \item{index name}{name for each index}

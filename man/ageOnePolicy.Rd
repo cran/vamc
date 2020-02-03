@@ -2,11 +2,7 @@
 % Please edit documentation in R/Step4_MonteCarloValuation.R
 \name{ageOnePolicy}
 \alias{ageOnePolicy}
-\title{Age a VA policy specified in inPolicy from currentDate (specified in
-inPolicy) to targetDate. The againg scenario is given in fundScen.
-The time step length is specified in dT.
-Here we input a rather irrelevant parameter df to "hack" for a more
-flexible user-defined projection function.}
+\title{Age One Policy}
 \usage{
 ageOnePolicy(
   inPolicy,

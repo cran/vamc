@@ -10,14 +10,17 @@ fixFreq <- 6
 fixDCC <- "Thirty360"
 fltFreq <- 6
 fltDCC <- "ACT360"
-calendar <- "NY"
+calendar <- "General"
 bdc <- "Modified_Foll"
 curveDate <- "2016-02-08"
 numSetDay <- 2
 yieldCurveDCC <- "Thirty360"
+holidays <- NULL
+
 # Bootstrap a forward curve 
 buildCurve(swap, tenor, fixFreq, fixDCC, fltFreq, fltDCC, calendar, bdc,
-            curveDate, numSetDay, yieldCurveDCC)
+            curveDate, numSetDay, yieldCurveDCC, holidays)
+
 
 ## ---- echo=FALSE, results='asis'----------------------------------------------
 # Default randomly generated covariance matrix

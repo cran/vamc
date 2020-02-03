@@ -12,7 +12,7 @@
 
 <meta name="author" content="Hengxin Li, Mingbin Feng, Mingyi Jiang" />
 
-<meta name="date" content="2020-01-19" />
+<meta name="date" content="2020-02-02" />
 
 <title>A Comprehensive Monte Carlo Valuation of Variable Annuities</title>
 
@@ -305,7 +305,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">A Comprehensive Monte Carlo Valuation of Variable Annuities</h1>
 <h4 class="author">Hengxin Li, Mingbin Feng, Mingyi Jiang</h4>
-<h4 class="date">2020-01-19</h4>
+<h4 class="date">2020-02-02</h4>
 
 
 
@@ -315,7 +315,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>For illustrative purposes, we will use few scenarios to valuate a pool of two variable annuities. Users may obtain a more robust valuation result by increasing the amount of risk-neutral scenarios.</p>
 <div id="yield-curve-generation" class="section level2">
 <h2>Yield Curve Generation</h2>
-<p>In this step, we exploit Newton’s method to calculate discount factors and forward rates at different tenor based on given swap rates using <em>buildCurve()</em>.</p>
+<p>In this step, we exploit Secant method to calculate discount factors and forward rates at different tenor based on given swap rates using <em>buildCurve()</em>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Initialize required inputs to boostrap a curve</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>swap &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.69</span>, <span class="fl">0.77</span>, <span class="fl">0.88</span>, <span class="fl">1.01</span>, <span class="fl">1.14</span>, <span class="fl">1.38</span>, <span class="fl">1.66</span>, <span class="fl">2.15</span>)<span class="op">*</span><span class="fl">0.01</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a>tenor &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">10</span>, <span class="dv">30</span>)</span>
@@ -323,24 +323,26 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <span id="cb1-5"><a href="#cb1-5"></a>fixDCC &lt;-<span class="st"> &quot;Thirty360&quot;</span></span>
 <span id="cb1-6"><a href="#cb1-6"></a>fltFreq &lt;-<span class="st"> </span><span class="dv">6</span></span>
 <span id="cb1-7"><a href="#cb1-7"></a>fltDCC &lt;-<span class="st"> &quot;ACT360&quot;</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>calendar &lt;-<span class="st"> &quot;NY&quot;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>calendar &lt;-<span class="st"> &quot;General&quot;</span></span>
 <span id="cb1-9"><a href="#cb1-9"></a>bdc &lt;-<span class="st"> &quot;Modified_Foll&quot;</span></span>
 <span id="cb1-10"><a href="#cb1-10"></a>curveDate &lt;-<span class="st"> &quot;2016-02-08&quot;</span></span>
 <span id="cb1-11"><a href="#cb1-11"></a>numSetDay &lt;-<span class="st"> </span><span class="dv">2</span></span>
 <span id="cb1-12"><a href="#cb1-12"></a>yieldCurveDCC &lt;-<span class="st"> &quot;Thirty360&quot;</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="co"># Bootstrap a forward curve </span></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="kw">buildCurve</span>(swap, tenor, fixFreq, fixDCC, fltFreq, fltDCC, calendar, bdc,</span>
-<span id="cb1-15"><a href="#cb1-15"></a>            curveDate, numSetDay, yieldCurveDCC)</span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="co">#&gt;      obsDate discountFac    zeroRate forwardCurve  dayCount</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="co">#&gt; 1 2016-02-08   1.0000000 0.000000000  0.006912035  0.000000</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="co">#&gt; 2 2017-02-10   0.9930975 0.006888125  0.008520036  1.005556</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="co">#&gt; 3 2018-02-10   0.9847078 0.007683825  0.011060713  2.005556</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a><span class="co">#&gt; 4 2019-02-10   0.9739354 0.008787170  0.014146403  3.005556</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a><span class="co">#&gt; 5 2020-02-10   0.9603499 0.010100373  0.016846310  4.005556</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a><span class="co">#&gt; 6 2021-02-10   0.9444396 0.011420029  0.020451281  5.005556</span></span>
-<span id="cb1-23"><a href="#cb1-23"></a><span class="co">#&gt; 7 2023-02-10   0.9073275 0.013882093  0.024514485  7.005556</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a><span class="co">#&gt; 8 2026-02-10   0.8451708 0.016812319  0.032098279 10.005556</span></span>
-<span id="cb1-25"><a href="#cb1-25"></a><span class="co">#&gt; 9 2046-02-10   0.5147311 0.022132923  0.032098279 30.005556</span></span></code></pre></div>
+<span id="cb1-13"><a href="#cb1-13"></a>holidays &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="co"># Bootstrap a forward curve </span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="kw">buildCurve</span>(swap, tenor, fixFreq, fixDCC, fltFreq, fltDCC, calendar, bdc,</span>
+<span id="cb1-17"><a href="#cb1-17"></a>            curveDate, numSetDay, yieldCurveDCC, holidays)</span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="co">#&gt;      obsDate discountFac    zeroRate forwardCurve  dayCount</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="co">#&gt; 1 2016-02-08   1.0000000 0.000000000  0.006912035  0.000000</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="co">#&gt; 2 2017-02-10   0.9930975 0.006888125  0.008520036  1.005556</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="co">#&gt; 3 2018-02-10   0.9847078 0.007683825  0.011060713  2.005556</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="co">#&gt; 4 2019-02-10   0.9739354 0.008787170  0.014146403  3.005556</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="co">#&gt; 5 2020-02-10   0.9603499 0.010100373  0.016846310  4.005556</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="co">#&gt; 6 2021-02-10   0.9444396 0.011420029  0.020451281  5.005556</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="co">#&gt; 7 2023-02-10   0.9073275 0.013882093  0.024514485  7.005556</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a><span class="co">#&gt; 8 2026-02-10   0.8451708 0.016812319  0.032098279 10.005556</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a><span class="co">#&gt; 9 2046-02-10   0.5147311 0.022132923  0.032098279 30.005556</span></span></code></pre></div>
 </div>
 <div id="generate-index-scenarios-and-fund-scenarios" class="section level2">
 <h2>Generate index scenarios and fund scenarios</h2>
@@ -614,13 +616,13 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; [1] 0</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt; </span></span>
 <span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; $portRC</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; [1] 597.3302</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; [1] 597.3245</span></span>
 <span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt; </span></span>
 <span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt; $vecVal</span></span>
 <span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt; [1] 0 0</span></span>
 <span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt; </span></span>
 <span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt; $vecRC</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt; [1] 347.5886 249.7416</span></span></code></pre></div>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt; [1] 347.5846 249.7399</span></span></code></pre></div>
 <p>Note that users can also “age” the portfolio, calling the function <em>agePortfolio()</em>, to a particular valuatioon date by incorporating the historical fund movements prior to that date.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Again, we will arbitrarily age a portfolio of two guarantees to speed up the execution.</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>targetDate &lt;-<span class="st"> &quot;2016-01-01&quot;</span></span>
@@ -661,7 +663,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; [1] 0</span></span>
 <span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; </span></span>
 <span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; $riskCharge</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; [1] 454.1419</span></span></code></pre></div>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; [1] 454.1367</span></span></code></pre></div>
 </div>
 <div id="aging-of-one-variable-annuity" class="section level3">
 <h3>Aging of one variable annuity</h3>

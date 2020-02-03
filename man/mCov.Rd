@@ -3,7 +3,7 @@
 \docType{data}
 \name{mCov}
 \alias{mCov}
-\title{covariance matrix for 5 indices}
+\title{Covariance Matrix for 5 Indices}
 \format{A matrix with 5 rows and 5 columns:
 \describe{
   \item{index number}{number for each index}

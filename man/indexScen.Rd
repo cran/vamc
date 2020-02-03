@@ -3,7 +3,7 @@
 \docType{data}
 \name{indexScen}
 \alias{indexScen}
-\title{5 indices for 10 scenarios over 360 months}
+\title{5 Indices for 10 Scenarios over 360 Months}
 \format{A 3D array with dimensions 10x360x5:
 \describe{
   \item{scenario}{scenario number}

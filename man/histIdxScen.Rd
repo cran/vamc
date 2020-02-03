@@ -3,7 +3,7 @@
 \docType{data}
 \name{histIdxScen}
 \alias{histIdxScen}
-\title{Historical index scenario for 5 indices over 175 months}
+\title{Historical Index Scenario for 5 Indices over 175 Months}
 \format{A data frame with dimensions 175 rows and 10 columns:
 \describe{
   \item{FIXED}{historical return for index "FIXED" in one month}

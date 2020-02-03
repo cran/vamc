@@ -2,11 +2,7 @@
 % Please edit documentation in R/Step2_ScenarioGeneration.R
 \name{genIndexScen}
 \alias{genIndexScen}
-\title{Simulate a 3D array, numScen by numIndex by numStep, of Black-Scholes return
-factors for numIndex indices in each of numStep time steps and each of
-numScen scenarios. Covariances among indices are specified in covMatrix.
-Stepsize is given is dT and interpolated discount factors are given in vDF.
-Random seed is optional for reproducibility.}
+\title{Generate Index Scenerio}
 \usage{
 genIndexScen(covMatrix, numScen, numStep, indexNames, dT, forwardCurve, seed)
 }

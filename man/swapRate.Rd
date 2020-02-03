@@ -3,7 +3,7 @@
 \docType{data}
 \name{swapRate}
 \alias{swapRate}
-\title{Swap rates across 30 years}
+\title{Swap Rates across 30 Years}
 \format{A vector with 8 elements:
 \describe{
   \item{rate}{swap rate}
