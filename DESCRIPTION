@@ -1,7 +1,7 @@
 Package: vamc
 Type: Package
 Title: A Monte Carlo Valuation Framework for Variable Annuities
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(
     person("Hengxin", "Li", email = "h343li@uwaterloo.ca", 
     role = c("aut", "cph")),
@@ -27,10 +27,10 @@ RdMacros: Rdpack
 NeedsCompilation: no
 Encoding: UTF-8
 Repository: CRAN
-Packaged: 2020-02-03 04:02:44 UTC; Iris
+Packaged: 2020-02-27 01:43:34 UTC; Iris
 Author: Hengxin Li [aut, cph],
   Ben Feng [aut, cph],
   Mingyi Jiang [aut, cph, cre],
   GuoJun Gan [ctb]
 Maintainer: Mingyi Jiang <m64jiang@uwaterloo.ca>
-Date/Publication: 2020-02-03 15:50:02 UTC
+Date/Publication: 2020-02-28 12:00:02 UTC

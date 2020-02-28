@@ -1585,7 +1585,7 @@ projectDBWB <- function(inPolicy, oneFundScen, dT = 1 / 12, pq, p, df){
 #' exPolicy <- VAPort[1, ]
 #' valuateOnePolicy(exPolicy, mortTable, fundScen, 1 / 12, cForwardCurve)
 #' @export
-valuateOnePolicy <- function(inPolicy, mortTable, fundScen, dT, df){
+valuateOnePolicy <- function(inPolicy, mortTable, fundScen, dT = 1 / 12, df){
   if (inPolicy[1, "matDate"] <= inPolicy[1, "currentDate"]) {
     return(policyValue = 0)
   }
@@ -1774,7 +1774,7 @@ historical scenario date 2001-08-01"
 #' fundScen <- genFundScen(fundMap, indexScen)[1, , ]
 #' valuatePortfolio(VAPort[1:2, ], mortTable, fundScen, 1 / 12, cForwardCurve)
 #' @export
-valuatePortfolio <- function(inPortfolio, mortTable, fundScen, dT, df){
+valuatePortfolio <- function(inPortfolio, mortTable, fundScen, dT = 1 / 12, df){
   numPolicy <- nrow(inPortfolio)
   vecVal <- rep(0, numPolicy)
   vecRC <- rep(0, numPolicy)

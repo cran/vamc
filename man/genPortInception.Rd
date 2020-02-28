@@ -68,5 +68,4 @@ riderFee = c(25, 35, 35, 50), rep(5, 4), rep(5, 4), 100)
 \dontrun{
 genPortInception()
 }
-
 }

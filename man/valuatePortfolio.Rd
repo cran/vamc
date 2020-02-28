@@ -4,7 +4,7 @@
 \alias{valuatePortfolio}
 \title{Valuate a Portfolio}
 \usage{
-valuatePortfolio(inPortfolio, mortTable, fundScen, dT, df)
+valuatePortfolio(inPortfolio, mortTable, fundScen, dT = 1/12, df)
 }
 \arguments{
 \item{inPortfolio}{A dataframe containing numPolicy rows and 45 attributes

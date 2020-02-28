@@ -18,7 +18,7 @@ Outputs a numScen-by-numStep-by-numFund array of doubles of
   fund scenarios.
 }
 \description{
-Calculate numScen-by-numIndex-by-numStep fund scenarios based on given index
+Calculate numScen-by-numStep-by-numFund fund scenarios based on given index
 scenarios indexScen and fund map fundMap that maps indices to funds.
 }
 \examples{

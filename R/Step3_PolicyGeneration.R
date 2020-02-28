@@ -33,7 +33,6 @@
 #' \dontrun{
 #' genPortInception()
 #' }
-#' 
 #' @importFrom stats runif
 #' @export
 genPortInception <- function(birthDayRng = c("1950-01-01", "1980-01-01"),
@@ -134,7 +133,7 @@ genPortInception <- function(birthDayRng = c("1950-01-01", "1980-01-01"),
 
     # Fund info calculation
     # -- fundNum, unclear what the usage is at the moment
-    fundNum <- matrix(rep(1:10, each = portSize), nrow = portSize)
+    fundNum <- matrix(rep(1:numFund, each = portSize), nrow = portSize)
     colnames(fundNum) <- paste0("fundNum", sprintf("%d", 1:numFund))
 
     # -- fundValue, at inception, equally allocate account value to

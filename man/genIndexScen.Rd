@@ -4,7 +4,15 @@
 \alias{genIndexScen}
 \title{Generate Index Scenerio}
 \usage{
-genIndexScen(covMatrix, numScen, numStep, indexNames, dT, forwardCurve, seed)
+genIndexScen(
+  covMatrix,
+  numScen,
+  numStep,
+  indexNames,
+  dT = 1/12,
+  forwardCurve,
+  seed
+)
 }
 \arguments{
 \item{covMatrix}{A numIndex-by-numIndex matrix of doubles of covariances
@@ -28,7 +36,7 @@ Outputs a 3D array (numScen-by-numStep-by-numIndex) of index
   scenarios
 }
 \description{
-Simulate a 3D array, numScen by numIndex by numStep, of Black-Scholes return
+Simulate a 3D array, numScen-by-numStep-by-numIndex, of Black-Scholes return
 factors for numIndex indices in each of numStep time steps and each of
 numScen scenarios. Covariances among indices are specified in covMatrix.
 Stepsize is given is dT and interpolated discount factors are given in vDF.

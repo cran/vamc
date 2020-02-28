@@ -4,7 +4,7 @@
 \alias{valuateOnePolicy}
 \title{Valuate One Policy}
 \usage{
-valuateOnePolicy(inPolicy, mortTable, fundScen, dT, df)
+valuateOnePolicy(inPolicy, mortTable, fundScen, dT = 1/12, df)
 }
 \arguments{
 \item{inPolicy}{A vector containing 45 attributes of a VA policy,
